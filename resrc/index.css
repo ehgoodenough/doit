@@ -1,0 +1,27 @@
+*
+{
+	margin: 0px;
+}
+
+html
+{
+	font-size: 18px;
+	font-family: open-sans, sans-serif;
+}
+
+body
+{
+	margin: 1rem;
+}
+
+input[type=text]
+{
+	width: 100%;
+	padding: 0.25rem;
+	box-sizing: border-box;
+	
+	font: inherit;
+}
+
+@font-face {font-family: forque; src: url("stuff/forque.ttf") format("truetype");}
+@font-face {font-family: open-sans; src: url("stuff/open-sans.ttf") format("truetype");}
