@@ -5,38 +5,34 @@
 var React = require("react");
 
 var ToDo = require("./ToDo.js");
+var ToDoStore = require("./ToDoStore.js");
 
 var ToDoList = React.createClass(
 {
-	getInitialState: function()
-	{
-		return {
-			tasks: {
-				123: "Take out the trash",
-				124: "Call your grandma",
-				125: "Mow the lawn",
-			}
-		};
-	},
 	render: function()
 	{
-		var todos = Object.keys(this.state.tasks).map(function(key)
+		var todos = ToDoStore.map(function(task, key)
 		{
 			return (
-				<ToDo key={key} task={this.state.tasks[key]} id={key} />
+				<ToDo key={key} task={task}/>
 			);
 		}
 		.bind(this));
 
 		return (
 			<div>
+				<form onSubmit={this.appendToDo}>
+					<input type="text"/>
+				</form>
 				{todos}
 			</div>
 		);
 	},
-	archiveToDo: function(id)
+	appendToDo: function(event)
 	{
-		delete this.state.tasks[id];
+		event.preventDefault();
+		console.log(event);
+		ToDoStore.push("Go to sleep.");
 		this.forceUpdate();
 	}
 });

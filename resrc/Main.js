@@ -15,7 +15,6 @@ var Main = React.createClass(
 		return (
 			React.createElement("div", null, 
 				React.createElement(Header, null), 
-				React.createElement("input", {type: "text"}), 
 				React.createElement(ToDoList, null)
 			)
 		);
@@ -21397,6 +21396,8 @@ var React = require("react");
 var Moment = require("moment");
 var Notify = require("notifyjs");
 
+var ToDoStore = require("./ToDoStore.js");
+
 var ToDo = React.createClass(
 {displayName: 'ToDo',
 	getInitialState: function()
@@ -21503,14 +21504,11 @@ var ToDo = React.createClass(
 	{
 		this.state.startTime = Moment().format();
 		this.state.endTime = Moment().add(this.getRandomTimerange(), "seconds").format();
-	},
-	archiveToDo: function()
-	{
 	}
 });
 
 module.exports = ToDo;
-},{"moment":3,"notifyjs":4,"react":150}],153:[function(require,module,exports){
+},{"./ToDoStore.js":154,"moment":3,"notifyjs":4,"react":150}],153:[function(require,module,exports){
 /**
  * @jsx React.DOM
  */
@@ -21518,41 +21516,45 @@ module.exports = ToDo;
 var React = require("react");
 
 var ToDo = require("./ToDo.js");
+var ToDoStore = require("./ToDoStore.js");
 
 var ToDoList = React.createClass(
 {displayName: 'ToDoList',
-	getInitialState: function()
-	{
-		return {
-			tasks: {
-				123: "Take out the trash",
-				124: "Call your grandma",
-				125: "Mow the lawn",
-			}
-		};
-	},
 	render: function()
 	{
-		var todos = Object.keys(this.state.tasks).map(function(key)
+		var todos = ToDoStore.map(function(task, key)
 		{
 			return (
-				React.createElement(ToDo, {key: key, task: this.state.tasks[key], id: key})
+				React.createElement(ToDo, {key: key, task: task})
 			);
 		}
 		.bind(this));
 
 		return (
 			React.createElement("div", null, 
+				React.createElement("form", {onSubmit: this.appendToDo}, 
+					React.createElement("input", {type: "text"})
+				), 
 				todos
 			)
 		);
 	},
-	archiveToDo: function(id)
+	appendToDo: function(event)
 	{
-		delete this.state.tasks[id];
+		event.preventDefault();
+		console.log(event);
+		ToDoStore.push("Go to sleep.");
 		this.forceUpdate();
 	}
 });
 
 module.exports = ToDoList;
-},{"./ToDo.js":152,"react":150}]},{},[1]);
+},{"./ToDo.js":152,"./ToDoStore.js":154,"react":150}],154:[function(require,module,exports){
+var ToDoStore = [
+	"Take out the trash",
+	"Call your grandma",
+	"Mow the lawn",
+]
+
+module.exports = ToDoStore;
+},{}]},{},[1]);

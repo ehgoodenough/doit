@@ -14,7 +14,6 @@ var Main = React.createClass(
 		return (
 			<div>
 				<Header/>
-				<input type="text"/>
 				<ToDoList />
 			</div>
 		);

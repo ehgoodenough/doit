@@ -6,6 +6,8 @@ var React = require("react");
 var Moment = require("moment");
 var Notify = require("notifyjs");
 
+var ToDoStore = require("./ToDoStore.js");
+
 var ToDo = React.createClass(
 {
 	getInitialState: function()
@@ -112,9 +114,6 @@ var ToDo = React.createClass(
 	{
 		this.state.startTime = Moment().format();
 		this.state.endTime = Moment().add(this.getRandomTimerange(), "seconds").format();
-	},
-	archiveToDo: function()
-	{
 	}
 });
 
