@@ -4,6 +4,7 @@
 
 var React = require("react");
 var Moment = require("moment");
+var Notify = require("notifyjs");
 
 var ToDo = React.createClass(
 {
@@ -22,6 +23,14 @@ var ToDo = React.createClass(
 			if(this.getCurrentTime() > this.getEndTime())
 			{
 				this.resetTimes();
+				
+				//new Audio("").play();
+				
+				/*new Notify("DO IT!",
+				{
+					body: this.props.task
+				})
+				.show();*/
 			}
 
 			this.forceUpdate();
@@ -93,16 +102,8 @@ var ToDo = React.createClass(
 	},
 	toggleFinished: function()
 	{
-		if(this.state.isFinished)
-		{
-			this.state.isFinished = false;
-			this.resetTimes();
-		}
-		else
-		{
-			this.state.isFinished = true;
-		}
-
+		this.state.isFinished = !this.state.isFinished;
+		this.resetTimes();
 		this.forceUpdate();
 	},
 	resetTimes: function()

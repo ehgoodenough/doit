@@ -9,6 +9,7 @@
   "dependencies": {
     "browserify": "^6.2.0",
     "moment": "^2.8.3",
+    "notifyjs": "^1.2.3",
     "react": "0.12.0",
     "react-router": "^0.10.2",
     "react-tools": "*",
