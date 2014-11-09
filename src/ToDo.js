@@ -3,16 +3,18 @@
  */
 
 var React = require("react");
+var Moment = require("moment");
 
 var ToDo = React.createClass(
 {
-	/*getInitialState: function()
+	getInitialState: function()
 	{
+		console.log(Moment().add(5, "minutes").format())
 		return {
 			startTime: Date.now(),
-			endTime: Date.now() + 
+			endTime: Date.now()
 		}
-	},*/
+	},
 	render: function()
 	{
 		return (
