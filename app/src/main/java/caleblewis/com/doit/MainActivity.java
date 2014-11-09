@@ -1,17 +1,38 @@
 package caleblewis.com.doit;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends Activity {
+
+    private EditText todo_prompt;
+    final ArrayList<String> todos = new ArrayList<String>();
+    private ListAdapter todosAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        todosAdapter = new ArrayAdapter<String>(this, R.layout.todos_list, todos);
+
+        ListView todosListView = (ListView) findViewById(R.id.list_of_todos);
+        todosListView.setAdapter(todosAdapter);
+
     }
 
 
@@ -35,5 +56,23 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addTODO(View view) {
+        final EditText dialog_input = new EditText(this);
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Update Status")
+                .setMessage("Please enter a todo")
+                .setView(dialog_input)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String newTodo = dialog_input.getText().toString();
+                        todos.add(newTodo);
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Do nothing.
+            }
+        }).show();
     }
 }
