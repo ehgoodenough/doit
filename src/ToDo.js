@@ -50,7 +50,7 @@ var ToDo = React.createClass(
 					<div className="content">
 						{this.props.task}
 						<a className="toggle" onClick={this.toggleFinished}>Did not do it?</a>
-						<a className="archive" onClick={this.archiveTask}>x</a>
+						<a className="archive" onClick={this.archiveToDo}>x</a>
 					</div>
 				</div>
 			);
@@ -64,7 +64,7 @@ var ToDo = React.createClass(
 						<img src="stuff/forque.png"/>
 						{this.props.task}
 						<a className="toggle" onClick={this.toggleFinished}>Did it?</a>
-						<a className="archive" onClick={this.archiveTask}>x</a>
+						<a className="archive" onClick={this.archiveToDo}>x</a>
 					</div>
 				</div>
 			);
@@ -113,9 +113,8 @@ var ToDo = React.createClass(
 		this.state.startTime = Moment().format();
 		this.state.endTime = Moment().add(this.getRandomTimerange(), "seconds").format();
 	},
-	archiveTask: function()
+	archiveToDo: function()
 	{
-		console.log("ARCHIVE TASK");
 	}
 });
 

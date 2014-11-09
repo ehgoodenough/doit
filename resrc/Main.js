@@ -5,7 +5,7 @@
 
 var React = require("react");
 
-var ToDo = require("./ToDo.js");
+var ToDoList = require("./ToDoList.js");
 var Header = require("./Header.js");
 
 var Main = React.createClass(
@@ -16,15 +16,14 @@ var Main = React.createClass(
 			React.createElement("div", null, 
 				React.createElement(Header, null), 
 				React.createElement("input", {type: "text"}), 
-				React.createElement(ToDo, {task: "Take out the trash!"}), 
-				React.createElement(ToDo, {task: "Call your grandma!"})
+				React.createElement(ToDoList, null)
 			)
 		);
 	}
 });
 
 React.render(React.createElement(Main, null), document.getElementById("main"));
-},{"./Header.js":151,"./ToDo.js":152,"react":150}],2:[function(require,module,exports){
+},{"./Header.js":151,"./ToDoList.js":153,"react":150}],2:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -21442,7 +21441,7 @@ var ToDo = React.createClass(
 					React.createElement("div", {className: "content"}, 
 						this.props.task, 
 						React.createElement("a", {className: "toggle", onClick: this.toggleFinished}, "Did not do it?"), 
-						React.createElement("a", {className: "archive", onClick: this.archiveTask}, "x")
+						React.createElement("a", {className: "archive", onClick: this.archiveToDo}, "x")
 					)
 				)
 			);
@@ -21456,7 +21455,7 @@ var ToDo = React.createClass(
 						React.createElement("img", {src: "stuff/forque.png"}), 
 						this.props.task, 
 						React.createElement("a", {className: "toggle", onClick: this.toggleFinished}, "Did it?"), 
-						React.createElement("a", {className: "archive", onClick: this.archiveTask}, "x")
+						React.createElement("a", {className: "archive", onClick: this.archiveToDo}, "x")
 					)
 				)
 			);
@@ -21505,11 +21504,55 @@ var ToDo = React.createClass(
 		this.state.startTime = Moment().format();
 		this.state.endTime = Moment().add(this.getRandomTimerange(), "seconds").format();
 	},
-	archiveTask: function()
+	archiveToDo: function()
 	{
-		console.log("ARCHIVE TASK");
 	}
 });
 
 module.exports = ToDo;
-},{"moment":3,"notifyjs":4,"react":150}]},{},[1]);
+},{"moment":3,"notifyjs":4,"react":150}],153:[function(require,module,exports){
+/**
+ * @jsx React.DOM
+ */
+
+var React = require("react");
+
+var ToDo = require("./ToDo.js");
+
+var ToDoList = React.createClass(
+{displayName: 'ToDoList',
+	getInitialState: function()
+	{
+		return {
+			tasks: {
+				123: "Take out the trash",
+				124: "Call your grandma",
+				125: "Mow the lawn",
+			}
+		};
+	},
+	render: function()
+	{
+		var todos = Object.keys(this.state.tasks).map(function(key)
+		{
+			return (
+				React.createElement(ToDo, {key: key, task: this.state.tasks[key], id: key})
+			);
+		}
+		.bind(this));
+
+		return (
+			React.createElement("div", null, 
+				todos
+			)
+		);
+	},
+	archiveToDo: function(id)
+	{
+		delete this.state.tasks[id];
+		this.forceUpdate();
+	}
+});
+
+module.exports = ToDoList;
+},{"./ToDo.js":152,"react":150}]},{},[1]);
