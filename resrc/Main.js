@@ -21219,6 +21219,11 @@ var ToDo = React.createClass(
 	{
 		this.interval = setInterval(function()
 		{
+			if(this.getCurrentTime() > this.getEndTime())
+			{
+				this.resetTimes();
+			}
+
 			this.forceUpdate();
 		}
 		.bind(this), 1000);
