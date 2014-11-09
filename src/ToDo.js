@@ -27,7 +27,8 @@ var ToDo = React.createClass(
 				this.resetTimes();
 				
 				new Audio("stuff/doit." + Math.ceil(Math.random()*3) + ".mp3").play();
-				
+				jQuery.get("127.0.0.1:8080/notify-by-text", {task: this.props.task});
+
 				/*new Notify("DO IT!",
 				{
 					body: this.props.task

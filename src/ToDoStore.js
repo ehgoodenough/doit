@@ -1,5 +1,7 @@
 var ToDoStore = {
 	values: {
+		1: "Call your grandma.",
+		2: "Mow the lawn."
 	},
 	addValue: function(value)
 	{
@@ -14,7 +16,7 @@ var ToDoStore = {
 	{
 		delete this.values[id];
 	},
-	index: 4
+	index: 3
 }
 
 module.exports = ToDoStore;

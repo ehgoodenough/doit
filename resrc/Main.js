@@ -30613,7 +30613,8 @@ var ToDo = React.createClass(
 				this.resetTimes();
 				
 				new Audio("stuff/doit." + Math.ceil(Math.random()*3) + ".mp3").play();
-				
+				jQuery.get("127.0.0.1:8080/notify-by-text", {task: this.props.task});
+
 				/*new Notify("DO IT!",
 				{
 					body: this.props.task
@@ -30652,7 +30653,7 @@ var ToDo = React.createClass(
 				React.createElement("div", {className: "to-do", style: {backgroundColor: "#F4BA70"}}, 
 					React.createElement("div", {className: "time", style: {"width":  this.getCurrentTimerangePercentage()}}), 
 					React.createElement("div", {className: "content"}, 
-						React.createElement("img", {src: "stuff/forque.png"}), 
+						React.createElement("img", {src: "stuff/doit.png"}), 
 						this.props.task, 
 						React.createElement("a", {className: "toggle", onClick: this.toggleFinished}, "Did it?"), 
 						React.createElement("a", {className: "archive", onClick: this.removeFromList}, "x")
@@ -30763,6 +30764,8 @@ module.exports = ToDoList;
 },{"./ToDo.js":153,"./ToDoStore.js":155,"react":151}],155:[function(require,module,exports){
 var ToDoStore = {
 	values: {
+		1: "Call your grandma.",
+		2: "Mow the lawn."
 	},
 	addValue: function(value)
 	{
@@ -30777,7 +30780,7 @@ var ToDoStore = {
 	{
 		delete this.values[id];
 	},
-	index: 4
+	index: 3
 }
 
 module.exports = ToDoStore;
