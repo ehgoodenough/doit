@@ -26,6 +26,7 @@ h1
 h1 > img
 {
 	width: 100%;
+	display: block;
 }
 
 input[type=text]
@@ -39,11 +40,19 @@ input[type=text]
 
 .to-do
 {
-	padding: 0.25rem;
+	padding: 0.5rem;
+	line-height: 1rem;
 	margin: 0.5rem 0rem;
 
-	border-radius: 0.5rem;
+	border-radius: 0.25rem;
 	background-color: #E96D63;
+}
+
+.to-do > img
+{
+	margin-right: 0.5rem;
+	vertical-align: middle;
+	height: 0.75rem;
 }
 
 @font-face {font-family: forque; src: url("stuff/forque.ttf") format("truetype");}

@@ -18357,7 +18357,7 @@ var ToDo = React.createClass(
 	{
 		return (
 			React.createElement("div", {className: "to-do"}, 
-				React.createElement("b", null, "doit!"), 
+				React.createElement("img", {src: "stuff/forque.png"}), 
 				this.props.task
 			)
 		);
