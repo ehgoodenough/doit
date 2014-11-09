@@ -26,7 +26,7 @@ var ToDo = React.createClass(
 			{
 				this.resetTimes();
 				
-				//new Audio("").play();
+				new Audio("stuff/doit." + Math.ceil(Math.random()*3) + ".mp3").play();
 				
 				/*new Notify("DO IT!",
 				{

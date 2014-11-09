@@ -1,8 +1,5 @@
 var ToDoStore = {
 	values: {
-		1: "Take out the trash",
-		2: "Call your grandma",
-		3: "Mow the lawn",
 	},
 	addValue: function(value)
 	{

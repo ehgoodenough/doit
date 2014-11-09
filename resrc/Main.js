@@ -30612,7 +30612,7 @@ var ToDo = React.createClass(
 			{
 				this.resetTimes();
 				
-				//new Audio("").play();
+				new Audio("stuff/doit." + Math.ceil(Math.random()*3) + ".mp3").play();
 				
 				/*new Notify("DO IT!",
 				{
@@ -30763,9 +30763,6 @@ module.exports = ToDoList;
 },{"./ToDo.js":153,"./ToDoStore.js":155,"react":151}],155:[function(require,module,exports){
 var ToDoStore = {
 	values: {
-		1: "Take out the trash",
-		2: "Call your grandma",
-		3: "Mow the lawn",
 	},
 	addValue: function(value)
 	{
