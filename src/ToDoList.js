@@ -31,8 +31,11 @@ var ToDoList = React.createClass(
 	appendToDo: function(event)
 	{
 		event.preventDefault();
-		console.log(event);
-		ToDoStore.push("Go to sleep.");
+		var input = $(event.target).find("input");
+		var value = input.val();
+		input.val(new String());
+
+		ToDoStore.unshift(value);
 		this.forceUpdate();
 	}
 });
