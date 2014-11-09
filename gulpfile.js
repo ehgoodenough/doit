@@ -18,6 +18,7 @@ gulp.task("copy", function()
 	gulp.src("src/Main.html").pipe(gulp.dest("resrc"));
 	gulp.src("src/Main.css").pipe(gulp.dest("resrc"));
 	gulp.src("src/stuff/*").pipe(gulp.dest("resrc/stuff/"));
+	gulp.src("src/Splash.html").pipe(gulp.dest("resrc"));
 });
 
 gulp.task("default", ["scripts", "styles", "copy"]);

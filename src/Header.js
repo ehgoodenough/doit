@@ -10,7 +10,7 @@ var Header = React.createClass(
 	{
 		return (
 			<h1>
-				<img src="stuff/forque.png"/>
+				<img src="stuff/doit.png"/>
 			</h1>
 		);
 	}

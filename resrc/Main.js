@@ -30576,7 +30576,7 @@ var Header = React.createClass(
 	{
 		return (
 			React.createElement("h1", null, 
-				React.createElement("img", {src: "stuff/forque.png"})
+				React.createElement("img", {src: "stuff/doit.png"})
 			)
 		);
 	}
