@@ -13,7 +13,7 @@ var Main = React.createClass(
 			<div>
 				<h1>doit</h1>
 				<input type="text"/>
-				<ToDo task="Take out the trash!"/>
+				<ToDo task="Take out the trash!" />
 				<ToDo task="Call your grandma!"/>
 			</div>
 		);
