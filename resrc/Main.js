@@ -30652,7 +30652,7 @@ var ToDo = React.createClass(
 				React.createElement("div", {className: "to-do", style: {backgroundColor: "#F4BA70"}}, 
 					React.createElement("div", {className: "time", style: {"width":  this.getCurrentTimerangePercentage()}}), 
 					React.createElement("div", {className: "content"}, 
-						React.createElement("img", {src: "stuff/forque.png"}), 
+						React.createElement("img", {src: "stuff/doit.png"}), 
 						this.props.task, 
 						React.createElement("a", {className: "toggle", onClick: this.toggleFinished}, "Did it?"), 
 						React.createElement("a", {className: "archive", onClick: this.removeFromList}, "x")

@@ -66,7 +66,7 @@ var ToDo = React.createClass(
 				<div className="to-do" style={{backgroundColor: "#F4BA70"}}>
 					<div className="time" style={{"width":  this.getCurrentTimerangePercentage()}}></div>
 					<div className="content">
-						<img src="stuff/forque.png"/>
+						<img src="stuff/doit.png"/>
 						{this.props.task}
 						<a className="toggle" onClick={this.toggleFinished}>Did it?</a>
 						<a className="archive" onClick={this.removeFromList}>x</a>
