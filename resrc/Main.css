@@ -13,7 +13,17 @@ html
 
 body
 {
-	margin: 1rem;
+	margin: auto;
+	padding: 1rem;
+	max-width: 480px;
+}
+
+h1
+{
+	font-size: 14rem;
+	text-align: center;
+	font-family: forque;
+	font-weight: normal;
 }
 
 input[type=text]
@@ -23,6 +33,15 @@ input[type=text]
 	box-sizing: border-box;
 	
 	font: inherit;
+}
+
+.to-do
+{
+	padding: 0.25rem;
+	margin: 0.5rem 0rem;
+
+	border-radius: 0.5rem;
+	background-color: #E96D63;
 }
 
 @font-face {font-family: forque; src: url("stuff/forque.ttf") format("truetype");}
