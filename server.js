@@ -24,15 +24,13 @@ express.get("/notify-by-text", function(request, response)
 	    to:"+13392039378",
 	    from: "+17069565083",
 	    body: "DO IT! " + task
-	})
-	.then(function(data)
+	});
+
+	twilio.sendMessage(
 	{
-	    //console.log("success!");
-	},
-	function(error)
-	{
-	    //console.error("failure.");
-	    console.error(error);
+	    to:"+14237747782",
+	    from: "+17069565083",
+	    body: "DO IT! " + task
 	});
 
 	response.send(200);
