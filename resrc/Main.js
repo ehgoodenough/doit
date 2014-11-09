@@ -21212,7 +21212,7 @@ var ToDo = React.createClass(
 		return {
 			isFinished: false,
 			startTime: Moment().format(),
-			endTime: Moment().add(Math.random() * 10 + 20, "seconds").format()
+			endTime: Moment().add(this.getRandomTimerange(), "seconds").format()
 		}
 	},
 	componentWillMount: function()
@@ -21234,7 +21234,8 @@ var ToDo = React.createClass(
 			return (
 				React.createElement("div", {className: "to-do", style: {backgroundColor: "#7FCA9F"}}, 
 					React.createElement("div", {className: "content"}, 
-						this.props.task
+						this.props.task, 
+						React.createElement("a", {onClick: this.toggleFinished}, "Did not do it?")
 					)
 				)
 			);
@@ -21247,7 +21248,7 @@ var ToDo = React.createClass(
 					React.createElement("div", {className: "content"}, 
 						React.createElement("img", {src: "stuff/forque.png"}), 
 						this.props.task, 
-						React.createElement("a", {onClick: this.finish}, "Did it?")
+						React.createElement("a", {onClick: this.toggleFinished}, "Did it?")
 					)
 				)
 			);
@@ -21277,14 +21278,32 @@ var ToDo = React.createClass(
 	{
 		return Math.min(100, this.getCurrentTimerange() / this.getTotalTimerange() * 100) + "%";
 	},
+	getRandomTimerange: function()
+	{
+		return Math.random() * 10 + 20;
+	},
 	isFinished: function()
 	{
 		return this.state.isFinished;
 	},
-	finish: function()
+	toggleFinished: function()
 	{
-		this.state.isFinished = true;
+		if(this.state.isFinished)
+		{
+			this.state.isFinished = false;
+			this.resetTimes();
+		}
+		else
+		{
+			this.state.isFinished = true;
+		}
+
 		this.forceUpdate();
+	},
+	resetTimes: function()
+	{
+		this.state.startTime = Moment().format();
+		this.state.endTime = Moment().add(this.getRandomTimerange(), "seconds").format();
 	}
 });
 
