@@ -30600,6 +30600,8 @@ var ToDo = React.createClass(
 	{
 		return {
 			isFinished: false,
+			minTimerange: 20,
+			maxTimerange: 60,
 			startTime: Moment().format(),
 			endTime: Moment().add(this.getRandomTimerange(), "seconds").format()
 		}
@@ -30619,6 +30621,9 @@ var ToDo = React.createClass(
 					body: this.props.task
 				})
 				.show();*/
+
+				this.state.maxTimerange /= 2;
+				console.log(this.state.maxTimerange);
 			}
 
 			this.forceUpdate();
@@ -30684,7 +30689,22 @@ var ToDo = React.createClass(
 	},
 	getRandomTimerange: function()
 	{
-		return Math.random() * 10 + 20;
+		var maxTimerange = 60;
+		var minTimerange = 20;
+
+		if(this.state)
+		{
+			if(this.state.minTimerange)
+			{
+				minTimerange = this.state.minTimerange;
+			}
+			if(this.state.maxTimerange)
+			{
+				maxTimerange = this.state.maxTimerange;
+			}
+		}
+
+		return Math.random() * maxTimerange + minTimerange;
 	},
 	isFinished: function()
 	{
