@@ -4,21 +4,25 @@
  */
 
 var React = require("react");
+var ToDo = require("./ToDo.js");
 
 var Main = React.createClass(
 {displayName: 'Main',
 	render: function()
 	{
 		return (
-			React.createElement("b", null, 
-				"Hello World!"
+			React.createElement("div", null, 
+				React.createElement("h1", null, "doit"), 
+				React.createElement("input", {type: "text"}), 
+				React.createElement(ToDo, {task: "Take out the trash!"}), 
+				React.createElement(ToDo, {task: "Call your grandma!"})
 			)
 		);
 	}
 });
 
 React.render(React.createElement(Main, null), document.getElementById("main"));
-},{"react":148}],2:[function(require,module,exports){
+},{"./ToDo.js":149,"react":148}],2:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -18311,4 +18315,24 @@ module.exports = warning;
 },{"./emptyFunction":109,"_process":2}],148:[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":30}]},{},[1]);
+},{"./lib/React":30}],149:[function(require,module,exports){
+/**
+ * @jsx React.DOM
+ */
+
+var React = require("react");
+
+var ToDo = React.createClass(
+{displayName: 'ToDo',
+	render: function()
+	{
+		return (
+			React.createElement("div", {className: "to-do"}, 
+				this.props.task
+			)
+		);
+	}
+});
+
+module.exports = ToDo;
+},{"react":148}]},{},[1]);
