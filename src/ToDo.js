@@ -12,10 +12,21 @@ var ToDo = React.createClass(
 {
 	getInitialState: function()
 	{
-		return {
-			isFinished: false,
-			startTime: Moment().format(),
-			endTime: Moment().add(this.getRandomTimerange(), "seconds").format()
+		if(this.props.id < 3)
+		{
+			return {
+				isFinished: false,
+				startTime: Moment().format(),
+				endTime: Moment().add(this.getRandomTimerange() / 4, "minutes").format()
+			}
+		}
+		else
+		{
+			return {
+				isFinished: false,
+				startTime: Moment().format(),
+				endTime: Moment().add(this.getRandomTimerange(), "seconds").format()
+			}
 		}
 	},
 	componentWillMount: function()
