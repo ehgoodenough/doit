@@ -11,10 +11,10 @@ var ToDoList = React.createClass(
 {
 	render: function()
 	{
-		var todos = ToDoStore.map(function(task, key)
+		var todos = Object.keys(ToDoStore.values).map(function(key)
 		{
 			return (
-				<ToDo key={key} task={task}/>
+				<ToDo key={key} task={ToDoStore.getValue(key)} id={key}/>
 			);
 		}
 		.bind(this));
@@ -31,11 +31,12 @@ var ToDoList = React.createClass(
 	appendToDo: function(event)
 	{
 		event.preventDefault();
+
 		var input = $(event.target).find("input");
 		var value = input.val();
 		input.val(new String());
 
-		ToDoStore.unshift(value);
+		ToDoStore.addValue(value);
 		this.forceUpdate();
 	}
 });

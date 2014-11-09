@@ -25,7 +25,7 @@ var Main = React.createClass(
 	}
 });
 
-React.render(React.createElement(Main, null), document.getElementById("main"));
+window.Main = React.render(React.createElement(Main, null), document.getElementById("main"));
 },{"./Header.js":152,"./ToDoList.js":154,"jquery":3,"react":151}],2:[function(require,module,exports){
 // shim for using process in browser
 
@@ -30600,8 +30600,6 @@ var ToDo = React.createClass(
 	{
 		return {
 			isFinished: false,
-			minTimerange: 20,
-			maxTimerange: 60,
 			startTime: Moment().format(),
 			endTime: Moment().add(this.getRandomTimerange(), "seconds").format()
 		}
@@ -30622,8 +30620,8 @@ var ToDo = React.createClass(
 				})
 				.show();*/
 
-				this.state.maxTimerange /= 2;
-				console.log(this.state.maxTimerange);
+				//this.state.maxTimerange /= 2;
+				//this.state.minTimerange /= 2;
 			}
 
 			this.forceUpdate();
@@ -30643,7 +30641,7 @@ var ToDo = React.createClass(
 					React.createElement("div", {className: "content"}, 
 						this.props.task, 
 						React.createElement("a", {className: "toggle", onClick: this.toggleFinished}, "Did not do it?"), 
-						React.createElement("a", {className: "archive", onClick: this.archiveToDo}, "x")
+						React.createElement("a", {className: "archive", onClick: this.removeFromList}, "x")
 					)
 				)
 			);
@@ -30657,7 +30655,7 @@ var ToDo = React.createClass(
 						React.createElement("img", {src: "stuff/forque.png"}), 
 						this.props.task, 
 						React.createElement("a", {className: "toggle", onClick: this.toggleFinished}, "Did it?"), 
-						React.createElement("a", {className: "archive", onClick: this.archiveToDo}, "x")
+						React.createElement("a", {className: "archive", onClick: this.removeFromList}, "x")
 					)
 				)
 			);
@@ -30692,18 +30690,6 @@ var ToDo = React.createClass(
 		var maxTimerange = 60;
 		var minTimerange = 20;
 
-		if(this.state)
-		{
-			if(this.state.minTimerange)
-			{
-				minTimerange = this.state.minTimerange;
-			}
-			if(this.state.maxTimerange)
-			{
-				maxTimerange = this.state.maxTimerange;
-			}
-		}
-
 		return Math.random() * maxTimerange + minTimerange;
 	},
 	isFinished: function()
@@ -30720,6 +30706,11 @@ var ToDo = React.createClass(
 	{
 		this.state.startTime = Moment().format();
 		this.state.endTime = Moment().add(this.getRandomTimerange(), "seconds").format();
+	},
+	removeFromList: function()
+	{
+		ToDoStore.removeValue(this.props.id);
+		Main.forceUpdate();
 	}
 });
 
@@ -30738,10 +30729,10 @@ var ToDoList = React.createClass(
 {displayName: 'ToDoList',
 	render: function()
 	{
-		var todos = ToDoStore.map(function(task, key)
+		var todos = Object.keys(ToDoStore.values).map(function(key)
 		{
 			return (
-				React.createElement(ToDo, {key: key, task: task})
+				React.createElement(ToDo, {key: key, task: ToDoStore.getValue(key), id: key})
 			);
 		}
 		.bind(this));
@@ -30758,22 +30749,39 @@ var ToDoList = React.createClass(
 	appendToDo: function(event)
 	{
 		event.preventDefault();
+
 		var input = $(event.target).find("input");
 		var value = input.val();
 		input.val(new String());
 
-		ToDoStore.unshift(value);
+		ToDoStore.addValue(value);
 		this.forceUpdate();
 	}
 });
 
 module.exports = ToDoList;
 },{"./ToDo.js":153,"./ToDoStore.js":155,"react":151}],155:[function(require,module,exports){
-var ToDoStore = [
-	"Take out the trash",
-	"Call your grandma",
-	"Mow the lawn",
-]
+var ToDoStore = {
+	values: {
+		1: "Take out the trash",
+		2: "Call your grandma",
+		3: "Mow the lawn",
+	},
+	addValue: function(value)
+	{
+		var id = this.index++;
+		this.values[id] = value;
+	},
+	getValue: function(id)
+	{
+		return this.values[id];
+	},
+	removeValue: function(id)
+	{
+		delete this.values[id];
+	},
+	index: 4
+}
 
 module.exports = ToDoStore;
 },{}]},{},[1]);

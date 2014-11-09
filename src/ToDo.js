@@ -14,8 +14,6 @@ var ToDo = React.createClass(
 	{
 		return {
 			isFinished: false,
-			minTimerange: 20,
-			maxTimerange: 60,
 			startTime: Moment().format(),
 			endTime: Moment().add(this.getRandomTimerange(), "seconds").format()
 		}
@@ -36,8 +34,8 @@ var ToDo = React.createClass(
 				})
 				.show();*/
 
-				this.state.maxTimerange /= 2;
-				this.state.minTimerange /= 2;
+				//this.state.maxTimerange /= 2;
+				//this.state.minTimerange /= 2;
 			}
 
 			this.forceUpdate();
@@ -57,7 +55,7 @@ var ToDo = React.createClass(
 					<div className="content">
 						{this.props.task}
 						<a className="toggle" onClick={this.toggleFinished}>Did not do it?</a>
-						<a className="archive" onClick={this.archiveToDo}>x</a>
+						<a className="archive" onClick={this.removeFromList}>x</a>
 					</div>
 				</div>
 			);
@@ -71,7 +69,7 @@ var ToDo = React.createClass(
 						<img src="stuff/forque.png"/>
 						{this.props.task}
 						<a className="toggle" onClick={this.toggleFinished}>Did it?</a>
-						<a className="archive" onClick={this.archiveToDo}>x</a>
+						<a className="archive" onClick={this.removeFromList}>x</a>
 					</div>
 				</div>
 			);
@@ -106,18 +104,6 @@ var ToDo = React.createClass(
 		var maxTimerange = 60;
 		var minTimerange = 20;
 
-		if(this.state)
-		{
-			if(this.state.minTimerange)
-			{
-				minTimerange = this.state.minTimerange;
-			}
-			if(this.state.maxTimerange)
-			{
-				maxTimerange = this.state.maxTimerange;
-			}
-		}
-
 		return Math.random() * maxTimerange + minTimerange;
 	},
 	isFinished: function()
@@ -134,6 +120,11 @@ var ToDo = React.createClass(
 	{
 		this.state.startTime = Moment().format();
 		this.state.endTime = Moment().add(this.getRandomTimerange(), "seconds").format();
+	},
+	removeFromList: function()
+	{
+		ToDoStore.removeValue(this.props.id);
+		Main.forceUpdate();
 	}
 });
 

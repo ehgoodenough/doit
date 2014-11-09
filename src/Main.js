@@ -18,10 +18,10 @@ var Main = React.createClass(
 		return (
 			<div>
 				<Header/>
-				<ToDoList />
+				<ToDoList/>
 			</div>
 		);
 	}
 });
 
-React.render(<Main/>, document.getElementById("main"));
+window.Main = React.render(<Main/>, document.getElementById("main"));
