@@ -10,8 +10,9 @@ var ToDo = React.createClass(
 	getInitialState: function()
 	{
 		return {
+			isFinished: false,
 			startTime: Moment().format(),
-			endTime: Moment().add(Math.random() * 40 + 20, "minutes").format()
+			endTime: Moment().add(Math.random() * 10 + 20, "seconds").format()
 		}
 	},
 	componentWillMount: function()
@@ -28,15 +29,29 @@ var ToDo = React.createClass(
 	},
 	render: function()
 	{
-		return (
-			<div className="to-do">
-				<div className="time" style={{"width":  this.getCurrentTimerangePercentage()}}></div>
-				<div className="content">
-					<img src="stuff/forque.png"/>
-					{this.props.task}
+		if(this.isFinished())
+		{
+			return (
+				<div className="to-do" style={{backgroundColor: "#7FCA9F"}}>
+					<div className="content">
+						{this.props.task}
+					</div>
 				</div>
-			</div>
-		);
+			);
+		}
+		else
+		{
+			return (
+				<div className="to-do" style={{backgroundColor: "#F4BA70"}}>
+					<div className="time" style={{"width":  this.getCurrentTimerangePercentage()}}></div>
+					<div className="content">
+						<img src="stuff/forque.png"/>
+						{this.props.task}
+						<a onClick={this.finish}>Did it?</a>
+					</div>
+				</div>
+			);
+		}
 	},
 	getStartTime: function()
 	{
@@ -61,6 +76,15 @@ var ToDo = React.createClass(
 	getCurrentTimerangePercentage: function()
 	{
 		return Math.min(100, this.getCurrentTimerange() / this.getTotalTimerange() * 100) + "%";
+	},
+	isFinished: function()
+	{
+		return this.state.isFinished;
+	},
+	finish: function()
+	{
+		this.state.isFinished = true;
+		this.forceUpdate();
 	}
 });
 

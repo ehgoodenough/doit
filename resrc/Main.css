@@ -46,7 +46,6 @@ input[type=text]
 
 	overflow: hidden;
 	border-radius: 0.25rem;
-	background-color: #F4BA70;
 }
 
 .to-do > .time
@@ -73,6 +72,14 @@ input[type=text]
 	height: 0.75rem;
 	margin-right: 0.5rem;
 	vertical-align: middle;
+}
+
+.to-do > .content > a
+{
+	margin-left: 0.5rem;
+
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 @font-face {font-family: forque; src: url("stuff/forque.ttf") format("truetype");}

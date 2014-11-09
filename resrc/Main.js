@@ -21210,8 +21210,9 @@ var ToDo = React.createClass(
 	getInitialState: function()
 	{
 		return {
+			isFinished: false,
 			startTime: Moment().format(),
-			endTime: Moment().add(Math.random() * 40 + 20, "minutes").format()
+			endTime: Moment().add(Math.random() * 10 + 20, "seconds").format()
 		}
 	},
 	componentWillMount: function()
@@ -21228,15 +21229,29 @@ var ToDo = React.createClass(
 	},
 	render: function()
 	{
-		return (
-			React.createElement("div", {className: "to-do"}, 
-				React.createElement("div", {className: "time", style: {"width":  this.getCurrentTimerangePercentage()}}), 
-				React.createElement("div", {className: "content"}, 
-					React.createElement("img", {src: "stuff/forque.png"}), 
-					this.props.task
+		if(this.isFinished())
+		{
+			return (
+				React.createElement("div", {className: "to-do", style: {backgroundColor: "#7FCA9F"}}, 
+					React.createElement("div", {className: "content"}, 
+						this.props.task
+					)
 				)
-			)
-		);
+			);
+		}
+		else
+		{
+			return (
+				React.createElement("div", {className: "to-do", style: {backgroundColor: "#F4BA70"}}, 
+					React.createElement("div", {className: "time", style: {"width":  this.getCurrentTimerangePercentage()}}), 
+					React.createElement("div", {className: "content"}, 
+						React.createElement("img", {src: "stuff/forque.png"}), 
+						this.props.task, 
+						React.createElement("a", {onClick: this.finish}, "Did it?")
+					)
+				)
+			);
+		}
 	},
 	getStartTime: function()
 	{
@@ -21261,6 +21276,15 @@ var ToDo = React.createClass(
 	getCurrentTimerangePercentage: function()
 	{
 		return Math.min(100, this.getCurrentTimerange() / this.getTotalTimerange() * 100) + "%";
+	},
+	isFinished: function()
+	{
+		return this.state.isFinished;
+	},
+	finish: function()
+	{
+		this.state.isFinished = true;
+		this.forceUpdate();
 	}
 });
 
