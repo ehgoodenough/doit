@@ -5,17 +5,19 @@
 
 var React = require("react");
 
-var Jobs = React.createClass(
-{displayName: 'Jobs',
+var Main = React.createClass(
+{displayName: 'Main',
 	render: function()
 	{
 		return (
-			React.createElement("div", {id: "jobs"}, "Hello World!")
+			React.createElement("b", null, 
+				"Hello World!"
+			)
 		);
 	}
 });
 
-module.exports = Jobs;
+React.render(React.createElement(Main, null), document.getElementById("main"));
 },{"react":148}],2:[function(require,module,exports){
 // shim for using process in browser
 
