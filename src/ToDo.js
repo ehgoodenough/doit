@@ -12,10 +12,21 @@ var ToDo = React.createClass(
 {
 	getInitialState: function()
 	{
-		return {
-			isFinished: false,
-			startTime: Moment().format(),
-			endTime: Moment().add(this.getRandomTimerange(), "seconds").format()
+		if(this.props.id < 3)
+		{
+			return {
+				isFinished: false,
+				startTime: Moment().format(),
+				endTime: Moment().add(this.getRandomTimerange() / 4, "minutes").format()
+			}
+		}
+		else
+		{
+			return {
+				isFinished: false,
+				startTime: Moment().format(),
+				endTime: Moment().add(this.getRandomTimerange(), "seconds").format()
+			}
 		}
 	},
 	componentWillMount: function()
@@ -27,7 +38,8 @@ var ToDo = React.createClass(
 				this.resetTimes();
 				
 				new Audio("stuff/doit." + Math.ceil(Math.random()*3) + ".mp3").play();
-				
+				jQuery.get("127.0.0.1:8080/notify-by-text", {task: this.props.task});
+
 				/*new Notify("DO IT!",
 				{
 					body: this.props.task
