@@ -21441,7 +21441,8 @@ var ToDo = React.createClass(
 				React.createElement("div", {className: "to-do", style: {backgroundColor: "#7FCA9F"}}, 
 					React.createElement("div", {className: "content"}, 
 						this.props.task, 
-						React.createElement("a", {onClick: this.toggleFinished}, "Did not do it?")
+						React.createElement("a", {className: "toggle", onClick: this.toggleFinished}, "Did not do it?"), 
+						React.createElement("a", {className: "archive", onClick: this.archiveTask}, "x")
 					)
 				)
 			);
@@ -21454,7 +21455,8 @@ var ToDo = React.createClass(
 					React.createElement("div", {className: "content"}, 
 						React.createElement("img", {src: "stuff/forque.png"}), 
 						this.props.task, 
-						React.createElement("a", {onClick: this.toggleFinished}, "Did it?")
+						React.createElement("a", {className: "toggle", onClick: this.toggleFinished}, "Did it?"), 
+						React.createElement("a", {className: "archive", onClick: this.archiveTask}, "x")
 					)
 				)
 			);
@@ -21494,13 +21496,6 @@ var ToDo = React.createClass(
 	},
 	toggleFinished: function()
 	{
-Notification.requestPermission(function (status) {
-// This allows to use Notification.permission with Chrome/Safari
-if (Notification.permission !== status) {
-Notification.permission = status;
-}
-});
-new Notification("Hi!");
 		this.state.isFinished = !this.state.isFinished;
 		this.resetTimes();
 		this.forceUpdate();
@@ -21509,6 +21504,10 @@ new Notification("Hi!");
 	{
 		this.state.startTime = Moment().format();
 		this.state.endTime = Moment().add(this.getRandomTimerange(), "seconds").format();
+	},
+	archiveTask: function()
+	{
+		console.log("ARCHIVE TASK");
 	}
 });
 
