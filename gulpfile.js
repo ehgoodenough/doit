@@ -19,5 +19,5 @@ gulp.task("default", ["compile", "copy"]);
 
 gulp.task("watch", function()
 {
-	gulp.watch("src/*.*", ["default"]);
+	gulp.watch("src/*", ["default"]);
 });
