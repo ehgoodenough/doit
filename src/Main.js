@@ -3,7 +3,9 @@
  */
 
 var React = require("react");
+
 var ToDo = require("./ToDo.js");
+var Header = require("./Header.js");
 
 var Main = React.createClass(
 {
@@ -11,9 +13,9 @@ var Main = React.createClass(
 	{
 		return (
 			<div>
-				<h1>doit</h1>
+				<Header/>
 				<input type="text"/>
-				<ToDo task="Take out the trash!" />
+				<ToDo task="Take out the trash!"/>
 				<ToDo task="Call your grandma!"/>
 			</div>
 		);
