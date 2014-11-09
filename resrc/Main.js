@@ -21209,20 +21209,58 @@ var ToDo = React.createClass(
 {displayName: 'ToDo',
 	getInitialState: function()
 	{
-		console.log(Moment().add(5, "minutes").format())
 		return {
-			startTime: Date.now(),
-			endTime: Date.now()
+			startTime: Moment().format(),
+			endTime: Moment().add(Math.random() * 40 + 20, "minutes").format()
 		}
+	},
+	componentWillMount: function()
+	{
+		this.interval = setInterval(function()
+		{
+			this.forceUpdate();
+		}
+		.bind(this), 1000);
+	},
+	componentWillUnmount: function()
+	{
+		clearInterval(this.interval);
 	},
 	render: function()
 	{
 		return (
 			React.createElement("div", {className: "to-do"}, 
-				React.createElement("img", {src: "stuff/forque.png"}), 
-				this.props.task
+				React.createElement("div", {className: "time", style: {"width":  this.getCurrentTimerangePercentage()}}), 
+				React.createElement("div", {className: "content"}, 
+					React.createElement("img", {src: "stuff/forque.png"}), 
+					this.props.task
+				)
 			)
 		);
+	},
+	getStartTime: function()
+	{
+		return new Date(this.state.startTime);
+	},
+	getEndTime: function()
+	{
+		return new Date(this.state.endTime);
+	},
+	getCurrentTime: function()
+	{
+		return Date.now();
+	},
+	getCurrentTimerange: function()
+	{
+		return this.getCurrentTime() - this.getStartTime();
+	},
+	getTotalTimerange: function()
+	{
+		return this.getEndTime() - this.getStartTime();
+	},
+	getCurrentTimerangePercentage: function()
+	{
+		return Math.min(100, this.getCurrentTimerange() / this.getTotalTimerange() * 100) + "%";
 	}
 });
 
